@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="radixModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="radixModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="aspnetroles">
           <Key>
             <PropertyRef Name="Id" />
@@ -235,7 +235,7 @@
             <PropertyRef Name="Prov_Id" />
           </Key>
           <Property Name="Prov_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Pro_Nom" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Prov_Nom" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Reg_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="regiones">
@@ -244,7 +244,7 @@
           </Key>
           <Property Name="Reg_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Reg_Nom" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="Reg_NomOrig" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Reg_NomOrig" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <EntityType Name="sectores">
           <Key>
@@ -381,20 +381,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Contratos_Personas1">
-          <End Role="personas" Type="Self.personas" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personas">
-              <PropertyRef Name="Per_Rut" />
-            </Principal>
-            <Dependent Role="contratos">
-              <PropertyRef Name="Per_Rut" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_contratos_planillacontratos">
           <End Role="planillascontratos" Type="Self.planillascontratos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -448,18 +434,6 @@
             </Principal>
             <Dependent Role="documentos">
               <PropertyRef Name="DT_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Documentos_Personas1">
-          <End Role="personas" Type="Self.personas" Multiplicity="1" />
-          <End Role="documentos" Type="Self.documentos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personas">
-              <PropertyRef Name="Per_Rut" />
-            </Principal>
-            <Dependent Role="documentos">
-              <PropertyRef Name="Per_Rut" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -561,7 +535,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Login_Personas1">
+        <Association Name="FK_login_Persona1">
           <End Role="personas" Type="Self.personas" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -586,20 +560,6 @@
             </Principal>
             <Dependent Role="nacionalidades">
               <PropertyRef Name="TNac_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Pago_Personas1">
-          <End Role="personas" Type="Self.personas" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="pago" Type="Self.pago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personas">
-              <PropertyRef Name="Per_Rut" />
-            </Principal>
-            <Dependent Role="pago">
-              <PropertyRef Name="Per_Rut" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -850,10 +810,6 @@
             <End Role="provincias" EntitySet="provincias" />
             <End Role="comunas" EntitySet="comunas" />
           </AssociationSet>
-          <AssociationSet Name="fk_Contratos_Personas1" Association="Self.fk_Contratos_Personas1">
-            <End Role="personas" EntitySet="personas" />
-            <End Role="contratos" EntitySet="contratos" />
-          </AssociationSet>
           <AssociationSet Name="FK_contratos_planillacontratos" Association="Self.FK_contratos_planillacontratos">
             <End Role="planillascontratos" EntitySet="planillascontratos" />
             <End Role="contratos" EntitySet="contratos" />
@@ -868,10 +824,6 @@
           </AssociationSet>
           <AssociationSet Name="fk_Documentos_DocTipos1" Association="Self.fk_Documentos_DocTipos1">
             <End Role="doctipos" EntitySet="doctipos" />
-            <End Role="documentos" EntitySet="documentos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Documentos_Personas1" Association="Self.fk_Documentos_Personas1">
-            <End Role="personas" EntitySet="personas" />
             <End Role="documentos" EntitySet="documentos" />
           </AssociationSet>
           <AssociationSet Name="FK_fichadescuentos_tipodescuento" Association="Self.FK_fichadescuentos_tipodescuento">
@@ -902,17 +854,13 @@
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
-          <AssociationSet Name="fk_Login_Personas1" Association="Self.fk_Login_Personas1">
+          <AssociationSet Name="FK_login_Persona1" Association="Self.FK_login_Persona1">
             <End Role="personas" EntitySet="personas" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
           <AssociationSet Name="FK_nacionalidades_tiponacionalidades" Association="Self.FK_nacionalidades_tiponacionalidades">
             <End Role="tiposnacionalidades" EntitySet="tiposnacionalidades" />
             <End Role="nacionalidades" EntitySet="nacionalidades" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Pago_Personas1" Association="Self.fk_Pago_Personas1">
-            <End Role="personas" EntitySet="personas" />
-            <End Role="pago" EntitySet="pago" />
           </AssociationSet>
           <AssociationSet Name="fk_Personas_cargos1" Association="Self.fk_Personas_cargos1">
             <End Role="cargos" EntitySet="cargos" />
@@ -971,8 +919,7 @@
             <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="radixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1029,16 +976,6 @@
           <Property Name="Car_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Car_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="personas" Relationship="Self.fk_Personas_cargos1" FromRole="cargos" ToRole="personas" />
-        </EntityType>
-        <EntityType Name="comunas">
-          <Key>
-            <PropertyRef Name="Com_Id" />
-          </Key>
-          <Property Name="Com_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Com_Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Prov_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="provincias" Relationship="Self.FK_comuna_provincia" FromRole="comunas" ToRole="provincias" />
-          <NavigationProperty Name="subempresas" Relationship="Self.FK_subempresas_comunas" FromRole="comunas" ToRole="subempresas" />
         </EntityType>
         <EntityType Name="contratos">
           <Key>
@@ -1243,25 +1180,6 @@
           <NavigationProperty Name="contratos" Relationship="Self.FK_contratos_planillacontratos" FromRole="planillascontratos" ToRole="contratos" />
           <NavigationProperty Name="doctipos" Relationship="Self.fk_PlanillasContratos_DocTipos1" FromRole="planillascontratos" ToRole="doctipos" />
         </EntityType>
-        <EntityType Name="provincias">
-          <Key>
-            <PropertyRef Name="Prov_Id" />
-          </Key>
-          <Property Name="Prov_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Pro_Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Reg_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="comunas" Relationship="Self.FK_comuna_provincia" FromRole="provincias" ToRole="comunas" />
-          <NavigationProperty Name="regiones" Relationship="Self.FK_regiones_provincias" FromRole="provincias" ToRole="regiones" />
-        </EntityType>
-        <EntityType Name="regiones">
-          <Key>
-            <PropertyRef Name="Reg_Id" />
-          </Key>
-          <Property Name="Reg_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Reg_Nom" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Reg_NomOrig" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="provincias" Relationship="Self.FK_regiones_provincias" FromRole="regiones" ToRole="provincias" />
-        </EntityType>
         <EntityType Name="sectores">
           <Key>
             <PropertyRef Name="Sec_Id" />
@@ -1281,9 +1199,9 @@
           <Property Name="Sub_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Sub_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Com_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="comunas" Relationship="Self.FK_subempresas_comunas" FromRole="subempresas" ToRole="comunas" />
           <NavigationProperty Name="contratos" Relationship="Self.FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
           <NavigationProperty Name="empresas" Relationship="Self.FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
+          <NavigationProperty Name="comunas" Relationship="radixModel.FK_subempresas_comunas" FromRole="subempresas" ToRole="comunas" />
         </EntityType>
         <EntityType Name="tipoformaspago">
           <Key>
@@ -1421,34 +1339,6 @@
             </Principal>
             <Dependent Role="personas">
               <PropertyRef Name="Car_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_comuna_provincia">
-          <End Role="provincias" Type="Self.provincias" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="comunas" Type="Self.comunas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="provincias">
-              <PropertyRef Name="Prov_Id" />
-            </Principal>
-            <Dependent Role="comunas">
-              <PropertyRef Name="Prov_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_subempresas_comunas">
-          <End Role="comunas" Type="Self.comunas" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="subempresas" Type="Self.subempresas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="comunas">
-              <PropertyRef Name="Com_Id" />
-            </Principal>
-            <Dependent Role="subempresas">
-              <PropertyRef Name="Com_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1772,20 +1662,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_regiones_provincias">
-          <End Role="regiones" Type="Self.regiones" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="provincias" Type="Self.provincias" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="regiones">
-              <PropertyRef Name="Reg_Id" />
-            </Principal>
-            <Dependent Role="provincias">
-              <PropertyRef Name="Reg_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tipoimpuesto_tipoperiodo">
           <End Role="tiposperiodos" Type="Self.tiposperiodos" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1810,7 +1686,6 @@
           <EntitySet Name="bancos" EntityType="Self.bancos" />
           <EntitySet Name="bancostiposcuentas" EntityType="Self.bancostiposcuentas" />
           <EntitySet Name="cargos" EntityType="Self.cargos" />
-          <EntitySet Name="comunas" EntityType="Self.comunas" />
           <EntitySet Name="contratos" EntityType="Self.contratos" />
           <EntitySet Name="doctipos" EntityType="Self.doctipos" />
           <EntitySet Name="documentos" EntityType="Self.documentos" />
@@ -1826,8 +1701,6 @@
           <EntitySet Name="pago" EntityType="Self.pago" />
           <EntitySet Name="personas" EntityType="Self.personas" />
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" />
-          <EntitySet Name="provincias" EntityType="Self.provincias" />
-          <EntitySet Name="regiones" EntityType="Self.regiones" />
           <EntitySet Name="sectores" EntityType="Self.sectores" />
           <EntitySet Name="subempresas" EntityType="Self.subempresas" />
           <EntitySet Name="tipoformaspago" EntityType="Self.tipoformaspago" />
@@ -1857,14 +1730,6 @@
           <AssociationSet Name="fk_Personas_cargos1" Association="Self.fk_Personas_cargos1">
             <End Role="cargos" EntitySet="cargos" />
             <End Role="personas" EntitySet="personas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_comuna_provincia" Association="Self.FK_comuna_provincia">
-            <End Role="provincias" EntitySet="provincias" />
-            <End Role="comunas" EntitySet="comunas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_subempresas_comunas" Association="Self.FK_subempresas_comunas">
-            <End Role="comunas" EntitySet="comunas" />
-            <End Role="subempresas" EntitySet="subempresas" />
           </AssociationSet>
           <AssociationSet Name="fk_Contratos_Personas1" Association="Self.fk_Contratos_Personas1">
             <End Role="personas" EntitySet="personas" />
@@ -1958,10 +1823,6 @@
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
             <End Role="personas" EntitySet="personas" />
           </AssociationSet>
-          <AssociationSet Name="FK_regiones_provincias" Association="Self.FK_regiones_provincias">
-            <End Role="regiones" EntitySet="regiones" />
-            <End Role="provincias" EntitySet="provincias" />
-          </AssociationSet>
           <AssociationSet Name="FK_tipoimpuesto_tipoperiodo" Association="Self.FK_tipoimpuesto_tipoperiodo">
             <End Role="tiposperiodos" EntitySet="tiposperiodos" />
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
@@ -1970,7 +1831,93 @@
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="aspnetroles" EntitySet="aspnetroles" />
           </AssociationSet>
+          <EntitySet Name="comunas" EntityType="radixModel.comunas" />
+          <EntitySet Name="provincias" EntityType="radixModel.provincias" />
+          <EntitySet Name="regiones" EntityType="radixModel.regiones" />
+          <AssociationSet Name="FK_comuna_provincia" Association="radixModel.FK_comuna_provincia">
+            <End Role="provincias" EntitySet="provincias" />
+            <End Role="comunas" EntitySet="comunas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subempresas_comunas" Association="radixModel.FK_subempresas_comunas">
+            <End Role="comunas" EntitySet="comunas" />
+            <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_regiones_provincias" Association="radixModel.FK_regiones_provincias">
+            <End Role="regiones" EntitySet="regiones" />
+            <End Role="provincias" EntitySet="provincias" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="comunas">
+          <Key>
+            <PropertyRef Name="Com_Id" />
+          </Key>
+          <Property Name="Com_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Com_Nom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prov_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="provincias" Relationship="radixModel.FK_comuna_provincia" FromRole="comunas" ToRole="provincias" />
+          <NavigationProperty Name="subempresas" Relationship="radixModel.FK_subempresas_comunas" FromRole="comunas" ToRole="subempresas" />
+        </EntityType>
+        <EntityType Name="provincias">
+          <Key>
+            <PropertyRef Name="Prov_Id" />
+          </Key>
+          <Property Name="Prov_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Prov_Nom" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Reg_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comunas" Relationship="radixModel.FK_comuna_provincia" FromRole="provincias" ToRole="comunas" />
+          <NavigationProperty Name="regiones" Relationship="radixModel.FK_regiones_provincias" FromRole="provincias" ToRole="regiones" />
+        </EntityType>
+        <EntityType Name="regiones">
+          <Key>
+            <PropertyRef Name="Reg_Id" />
+          </Key>
+          <Property Name="Reg_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reg_Nom" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Reg_NomOrig" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="provincias" Relationship="radixModel.FK_regiones_provincias" FromRole="regiones" ToRole="provincias" />
+        </EntityType>
+        <Association Name="FK_comuna_provincia">
+          <End Type="radixModel.provincias" Role="provincias" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.comunas" Role="comunas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="provincias">
+              <PropertyRef Name="Prov_Id" />
+            </Principal>
+            <Dependent Role="comunas">
+              <PropertyRef Name="Prov_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subempresas_comunas">
+          <End Type="radixModel.comunas" Role="comunas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comunas">
+              <PropertyRef Name="Com_Id" />
+            </Principal>
+            <Dependent Role="subempresas">
+              <PropertyRef Name="Com_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_regiones_provincias">
+          <End Type="radixModel.regiones" Role="regiones" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.provincias" Role="provincias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regiones">
+              <PropertyRef Name="Reg_Id" />
+            </Principal>
+            <Dependent Role="provincias">
+              <PropertyRef Name="Reg_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2025,15 +1972,6 @@
               <MappingFragment StoreEntitySet="cargos">
                 <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
                 <ScalarProperty Name="Car_Nom" ColumnName="Car_Nom" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="comunas">
-            <EntityTypeMapping TypeName="radixModel.comunas">
-              <MappingFragment StoreEntitySet="comunas">
-                <ScalarProperty Name="Com_Id" ColumnName="Com_Id" />
-                <ScalarProperty Name="Com_Nom" ColumnName="Com_Nom" />
-                <ScalarProperty Name="Prov_Id" ColumnName="Prov_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2215,24 +2153,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="provincias">
-            <EntityTypeMapping TypeName="radixModel.provincias">
-              <MappingFragment StoreEntitySet="provincias">
-                <ScalarProperty Name="Prov_Id" ColumnName="Prov_Id" />
-                <ScalarProperty Name="Pro_Nom" ColumnName="Pro_Nom" />
-                <ScalarProperty Name="Reg_Id" ColumnName="Reg_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="regiones">
-            <EntityTypeMapping TypeName="radixModel.regiones">
-              <MappingFragment StoreEntitySet="regiones">
-                <ScalarProperty Name="Reg_Id" ColumnName="Reg_Id" />
-                <ScalarProperty Name="Reg_Nom" ColumnName="Reg_Nom" />
-                <ScalarProperty Name="Reg_NomOrig" ColumnName="Reg_NomOrig" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sectores">
             <EntityTypeMapping TypeName="radixModel.sectores">
               <MappingFragment StoreEntitySet="sectores">
@@ -2330,6 +2250,33 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="comunas">
+            <EntityTypeMapping TypeName="radixModel.comunas">
+              <MappingFragment StoreEntitySet="comunas">
+                <ScalarProperty Name="Prov_Id" ColumnName="Prov_Id" />
+                <ScalarProperty Name="Com_Nom" ColumnName="Com_Nom" />
+                <ScalarProperty Name="Com_Id" ColumnName="Com_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provincias">
+            <EntityTypeMapping TypeName="radixModel.provincias">
+              <MappingFragment StoreEntitySet="provincias">
+                <ScalarProperty Name="Reg_Id" ColumnName="Reg_Id" />
+                <ScalarProperty Name="Prov_Nom" ColumnName="Prov_Nom" />
+                <ScalarProperty Name="Prov_Id" ColumnName="Prov_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regiones">
+            <EntityTypeMapping TypeName="radixModel.regiones">
+              <MappingFragment StoreEntitySet="regiones">
+                <ScalarProperty Name="Reg_NomOrig" ColumnName="Reg_NomOrig" />
+                <ScalarProperty Name="Reg_Nom" ColumnName="Reg_Nom" />
+                <ScalarProperty Name="Reg_Id" ColumnName="Reg_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

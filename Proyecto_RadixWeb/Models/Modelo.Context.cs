@@ -30,7 +30,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<bancos> bancos { get; set; }
         public virtual DbSet<bancostiposcuentas> bancostiposcuentas { get; set; }
         public virtual DbSet<cargos> cargos { get; set; }
-        public virtual DbSet<comunas> comunas { get; set; }
         public virtual DbSet<contratos> contratos { get; set; }
         public virtual DbSet<doctipos> doctipos { get; set; }
         public virtual DbSet<documentos> documentos { get; set; }
@@ -46,8 +45,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<pago> pago { get; set; }
         public virtual DbSet<personas> personas { get; set; }
         public virtual DbSet<planillascontratos> planillascontratos { get; set; }
-        public virtual DbSet<provincias> provincias { get; set; }
-        public virtual DbSet<regiones> regiones { get; set; }
         public virtual DbSet<sectores> sectores { get; set; }
         public virtual DbSet<subempresas> subempresas { get; set; }
         public virtual DbSet<tipoformaspago> tipoformaspago { get; set; }
@@ -58,5 +55,8 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<tiposhorasextras> tiposhorasextras { get; set; }
         public virtual DbSet<tiposnacionalidades> tiposnacionalidades { get; set; }
         public virtual DbSet<tiposperiodos> tiposperiodos { get; set; }
+        public virtual DbSet<comunas> comunas { get; set; }
+        public virtual DbSet<provincias> provincias { get; set; }
+        public virtual DbSet<regiones> regiones { get; set; }
     }
 }

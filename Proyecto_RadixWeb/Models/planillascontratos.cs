@@ -28,8 +28,8 @@ namespace Proyecto_RadixWeb.Models
         public int DT_Id { get; set; }
         public byte[] PC_Binario { get; set; }
     
+        public virtual doctipos doctipos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
-        public virtual doctipos doctipos { get; set; }
     }
 }

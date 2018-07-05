@@ -17,6 +17,7 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public empresas()
         {
+            this.login = new HashSet<login>();
             this.subempresas = new HashSet<subempresas>();
         }
     
@@ -26,6 +27,8 @@ namespace Proyecto_RadixWeb.Models
         public string Emp_Estado { get; set; }
         public string Emp_Dir { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<login> login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<subempresas> subempresas { get; set; }
     }

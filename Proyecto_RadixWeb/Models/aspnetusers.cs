@@ -17,8 +17,8 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aspnetusers()
         {
-            this.login = new HashSet<login>();
             this.aspnetroles = new HashSet<aspnetroles>();
+            this.login = new HashSet<login>();
         }
     
         public string Id { get; set; }
@@ -35,8 +35,8 @@ namespace Proyecto_RadixWeb.Models
         public string UserName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<login> login { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aspnetroles> aspnetroles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<login> login { get; set; }
     }
 }

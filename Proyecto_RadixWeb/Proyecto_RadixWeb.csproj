@@ -218,7 +218,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\empresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -298,6 +297,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MultipleClassRegistrar.cs" />
     <Compile Include="Models\nacionalidades.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -438,11 +438,6 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\empresas\Create.cshtml" />
-    <Content Include="Views\empresas\Delete.cshtml" />
-    <Content Include="Views\empresas\Details.cshtml" />
-    <Content Include="Views\empresas\Edit.cshtml" />
-    <Content Include="Views\empresas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

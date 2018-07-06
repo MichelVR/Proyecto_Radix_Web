@@ -9,12 +9,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Proyecto_RadixWeb.Models;
 
 namespace IdentitySample.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        radixEntities db = new radixEntities();
+
         public AccountController()
         {
         }
@@ -145,21 +148,56 @@ namespace IdentitySample.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(MultipleClassRegistrar model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.objRegistrar.Email, Email = model.objRegistrar.Email };
+                var result = await UserManager.CreateAsync(user, model.objRegistrar.Password);
                 if (result.Succeeded)
                 {
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    //return View("DisplayEmail");
                 }
                 AddErrors(result);
+
+                string idcuenta = user.Id;
+
+                aspnetroles asprol = db.aspnetroles.FirstOrDefault(r => r.Name == "Administrador");
+
+                var rol = new aspnetuserroles
+                {
+                    UserId = idcuenta,
+                    RoleId = asprol.Id
+                };
+
+                db.aspnetuserroles.Add(rol);
+                db.SaveChanges();
+
+                var emp = new empresas
+                {
+                    Emp_Nom= model.objEmpresas.Emp_Nom
+                };
+                db.empresas.Add(emp);
+                db.SaveChanges();
+
+                int empresa_id = emp.Emp_Id;
+
+                var log = new login
+                {
+                    Emp_Id = empresa_id,
+                    Id = idcuenta
+                   
+                };
+
+                db.login.Add(log);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+
             }
 
             // If we got this far, something failed, redisplay form

@@ -19,6 +19,7 @@ namespace IdentitySample.Controllers
                 ViewBag.empresa = empresa;
 
                 return View("DashBoardAdmin");
+
             }
 
 

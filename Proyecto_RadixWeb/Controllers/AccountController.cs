@@ -79,19 +79,20 @@ namespace IdentitySample.Controllers
 
             var user = db.aspnetusers.FirstOrDefault(r => r.Email == model.objLogin.Email );
             var log = db.login.FirstOrDefault(l => l.Id == user.Id);
+            
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
 
+          
             // El if conciste en buscar la cuenta que corresponde a la empresa
 
+         
             if (emp.Emp_Nom==model.objEmpresas.Emp_Nom)
             {
 
                 switch (result)
                 {
 
-
                     case SignInStatus.Success:
-
 
                         // var pers = db.Usuario.FirstOrDefault(p => p.usu_rut == login.usu_rut);
 
@@ -113,6 +114,7 @@ namespace IdentitySample.Controllers
                         return View(model);
                 }
             }
+           
             return View(model);
         }
 

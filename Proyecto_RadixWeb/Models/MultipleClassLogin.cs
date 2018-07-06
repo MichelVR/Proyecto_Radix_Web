@@ -5,14 +5,11 @@ using System.Web;
 
 namespace Proyecto_RadixWeb.Models
 {
-    public class MultipleClassRegistrar
+    public class MultipleClassLogin
     {
 
-        public IdentitySample.Models.RegisterViewModel objRegistrar { get; set; }
+        public IdentitySample.Models.LoginViewModel objLogin { get; set; }
         public Proyecto_RadixWeb.Models.empresas objEmpresas { get; set; }
-        public Proyecto_RadixWeb.Models.login objLogin { get; set; }
 
-       
-     
     }
 }

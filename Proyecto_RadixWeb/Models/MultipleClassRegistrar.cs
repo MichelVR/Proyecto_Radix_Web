@@ -10,6 +10,7 @@ namespace Proyecto_RadixWeb.Models
 
         public IdentitySample.Models.RegisterViewModel ojbRegistrar { get; set; }
         public Proyecto_RadixWeb.Models.empresas objEmpresas { get; set; }
+        public Proyecto_RadixWeb.Models.login objLogin { get; set; }
 
     }
 }

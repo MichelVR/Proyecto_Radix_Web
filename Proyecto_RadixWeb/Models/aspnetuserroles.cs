@@ -12,15 +12,12 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class login
+    public partial class aspnetuserroles
     {
-        public int log_id { get; set; }
-        public int Emp_Id { get; set; }
-        public string Per_Rut { get; set; }
-        public string Id { get; set; }
+        public string UserId { get; set; }
+        public string RoleId { get; set; }
     
         public virtual aspnetusers aspnetusers { get; set; }
-        public virtual empresas empresas { get; set; }
-        public virtual personas personas { get; set; }
+        public virtual aspnetroles aspnetroles { get; set; }
     }
 }

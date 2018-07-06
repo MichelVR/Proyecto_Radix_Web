@@ -25,8 +25,6 @@ namespace Proyecto_RadixWeb.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<aspnetroles> aspnetroles { get; set; }
-        public virtual DbSet<aspnetusers> aspnetusers { get; set; }
         public virtual DbSet<bancos> bancos { get; set; }
         public virtual DbSet<bancostiposcuentas> bancostiposcuentas { get; set; }
         public virtual DbSet<cargos> cargos { get; set; }
@@ -56,7 +54,10 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<provincias> provincias { get; set; }
         public virtual DbSet<regiones> regiones { get; set; }
         public virtual DbSet<contratos> contratos { get; set; }
-        public virtual DbSet<login> login { get; set; }
+        public virtual DbSet<aspnetuserroles> aspnetuserroles { get; set; }
+        public virtual DbSet<aspnetusers> aspnetusers { get; set; }
         public virtual DbSet<empresas> empresas { get; set; }
+        public virtual DbSet<login> login { get; set; }
+        public virtual DbSet<aspnetroles> aspnetroles { get; set; }
     }
 }

@@ -550,7 +550,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_login_Empresa">
+        <Association Name="fk_Login_Empresa1">
           <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
           <End Role="login" Type="Self.login" Multiplicity="*" />
           <ReferentialConstraint>
@@ -885,7 +885,7 @@
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
-          <AssociationSet Name="fk_login_Empresa" Association="Self.fk_login_Empresa">
+          <AssociationSet Name="fk_Login_Empresa1" Association="Self.fk_Login_Empresa1">
             <End Role="empresas" EntitySet="empresas" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
@@ -958,33 +958,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="radixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="aspnetroles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="Self.aspnetuserroles" FromRole="aspnetroles" ToRole="aspnetusers" />
-        </EntityType>
-        <EntityType Name="aspnetusers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="aspnetroles" Relationship="Self.aspnetuserroles" FromRole="aspnetusers" ToRole="aspnetroles" />
-          <NavigationProperty Name="login" Relationship="radixModel.fk_Login_CuentaAsp" FromRole="aspnetusers" ToRole="login" />
-        </EntityType>
         <EntityType Name="bancos">
           <Key>
             <PropertyRef Name="Ban_Id" />
@@ -1578,13 +1551,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="aspnetuserroles">
-          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="*" />
-          <End Role="aspnetroles" Type="Self.aspnetroles" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="radixEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" />
-          <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" />
           <EntitySet Name="bancos" EntityType="Self.bancos" />
           <EntitySet Name="bancostiposcuentas" EntityType="Self.bancostiposcuentas" />
           <EntitySet Name="cargos" EntityType="Self.cargos" />
@@ -1698,10 +1665,6 @@
             <End Role="tiposperiodos" EntitySet="tiposperiodos" />
             <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
           </AssociationSet>
-          <AssociationSet Name="aspnetuserroles" Association="Self.aspnetuserroles">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="aspnetroles" EntitySet="aspnetroles" />
-          </AssociationSet>
           <EntitySet Name="comunas" EntityType="radixModel.comunas" />
           <EntitySet Name="provincias" EntityType="radixModel.provincias" />
           <EntitySet Name="regiones" EntityType="radixModel.regiones" />
@@ -1734,23 +1697,34 @@
             <End Role="tiposcontratos" EntitySet="tiposcontratos" />
             <End Role="contratos" EntitySet="contratos" />
           </AssociationSet>
+          <EntitySet Name="aspnetuserroles" EntityType="radixModel.aspnetuserroles" />
+          <EntitySet Name="aspnetusers" EntityType="radixModel.aspnetusers" />
+          <EntitySet Name="empresas" EntityType="radixModel.empresas" />
           <EntitySet Name="login" EntityType="radixModel.login" />
+          <AssociationSet Name="ApplicationUser_Roles" Association="radixModel.ApplicationUser_Roles">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+          </AssociationSet>
           <AssociationSet Name="fk_Login_CuentaAsp" Association="radixModel.fk_Login_CuentaAsp">
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
-          <AssociationSet Name="FK_login_Persona1" Association="radixModel.FK_login_Persona1">
-            <End Role="personas" EntitySet="personas" />
-            <End Role="login" EntitySet="login" />
-          </AssociationSet>
-          <EntitySet Name="empresas" EntityType="radixModel.empresas" />
-          <AssociationSet Name="fk_login_Empresa" Association="radixModel.fk_login_Empresa">
+          <AssociationSet Name="fk_Login_Empresa1" Association="radixModel.fk_Login_Empresa1">
             <End Role="empresas" EntitySet="empresas" />
             <End Role="login" EntitySet="login" />
           </AssociationSet>
           <AssociationSet Name="FK_subempresas_empresas" Association="radixModel.FK_subempresas_empresas">
             <End Role="empresas" EntitySet="empresas" />
             <End Role="subempresas" EntitySet="subempresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_login_Persona1" Association="radixModel.FK_login_Persona1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <EntitySet Name="aspnetroles" EntityType="radixModel.aspnetroles" />
+          <AssociationSet Name="aspnetuserrolesaspnetroles" Association="radixModel.aspnetuserrolesaspnetroles">
+            <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+            <End Role="aspnetroles" EntitySet="aspnetroles" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="comunas">
@@ -1894,6 +1868,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aspnetuserroles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="radixModel.ApplicationUser_Roles" FromRole="aspnetuserroles" ToRole="aspnetusers" />
+          <NavigationProperty Name="aspnetroles" Relationship="radixModel.aspnetuserrolesaspnetroles" FromRole="aspnetuserroles" ToRole="aspnetroles" />
+        </EntityType>
+        <EntityType Name="aspnetusers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnetuserroles" Relationship="radixModel.ApplicationUser_Roles" FromRole="aspnetusers" ToRole="aspnetuserroles" />
+          <NavigationProperty Name="login" Relationship="radixModel.fk_Login_CuentaAsp" FromRole="aspnetusers" ToRole="login" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="Emp_Id" />
+          </Key>
+          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Nom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Cant" Type="Int32" />
+          <Property Name="Emp_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="login" Relationship="radixModel.fk_Login_Empresa1" FromRole="empresas" ToRole="login" />
+          <NavigationProperty Name="subempresas" Relationship="radixModel.FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
+        </EntityType>
         <EntityType Name="login">
           <Key>
             <PropertyRef Name="log_id" />
@@ -1903,9 +1918,23 @@
           <Property Name="Per_Rut" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="aspnetusers" Relationship="radixModel.fk_Login_CuentaAsp" FromRole="login" ToRole="aspnetusers" />
+          <NavigationProperty Name="empresas" Relationship="radixModel.fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
           <NavigationProperty Name="personas" Relationship="radixModel.FK_login_Persona1" FromRole="login" ToRole="personas" />
-          <NavigationProperty Name="empresas" Relationship="radixModel.fk_login_Empresa" FromRole="login" ToRole="empresas" />
         </EntityType>
+        <Association Name="ApplicationUser_Roles">
+          <End Type="radixModel.aspnetusers" Role="aspnetusers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.aspnetuserroles" Role="aspnetuserroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserroles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Login_CuentaAsp">
           <End Type="radixModel.aspnetusers" Role="aspnetusers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1920,33 +1949,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_login_Persona1">
-          <End Type="radixModel.personas" Role="personas" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.login" Role="login" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personas">
-              <PropertyRef Name="Per_Rut" />
-            </Principal>
-            <Dependent Role="login">
-              <PropertyRef Name="Per_Rut" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="empresas">
-          <Key>
-            <PropertyRef Name="Emp_Id" />
-          </Key>
-          <Property Name="Emp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Emp_Nom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Emp_Cant" Type="Int32" />
-          <Property Name="Emp_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Emp_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="login" Relationship="radixModel.fk_login_Empresa" FromRole="empresas" ToRole="login" />
-          <NavigationProperty Name="subempresas" Relationship="radixModel.FK_subempresas_empresas" FromRole="empresas" ToRole="subempresas" />
-        </EntityType>
-        <Association Name="fk_login_Empresa">
+        <Association Name="fk_Login_Empresa1">
           <End Type="radixModel.empresas" Role="empresas" Multiplicity="1" />
           <End Type="radixModel.login" Role="login" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1972,38 +1975,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_login_Persona1">
+          <End Type="radixModel.personas" Role="personas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.login" Role="login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aspnetroles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnetuserroles" Relationship="radixModel.aspnetuserrolesaspnetroles" FromRole="aspnetroles" ToRole="aspnetuserroles" />
+        </EntityType>
+        <Association Name="aspnetuserrolesaspnetroles">
+          <End Type="radixModel.aspnetuserroles" Role="aspnetuserroles" Multiplicity="*" />
+          <End Type="radixModel.aspnetroles" Role="aspnetroles" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetroles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserroles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="radixModelStoreContainer" CdmEntityContainer="radixEntities">
-          <EntitySetMapping Name="aspnetroles">
-            <EntityTypeMapping TypeName="radixModel.aspnetroles">
-              <MappingFragment StoreEntitySet="aspnetroles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aspnetusers">
-            <EntityTypeMapping TypeName="radixModel.aspnetusers">
-              <MappingFragment StoreEntitySet="aspnetusers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="bancos">
             <EntityTypeMapping TypeName="radixModel.bancos">
               <MappingFragment StoreEntitySet="bancos">
@@ -2265,14 +2276,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="aspnetuserroles" TypeName="radixModel.aspnetuserroles" StoreEntitySet="aspnetuserroles">
-            <EndProperty Name="aspnetusers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="aspnetroles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="comunas">
             <EntityTypeMapping TypeName="radixModel.comunas">
               <MappingFragment StoreEntitySet="comunas">
@@ -2311,13 +2314,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="login">
-            <EntityTypeMapping TypeName="radixModel.login">
-              <MappingFragment StoreEntitySet="login">
+          <EntitySetMapping Name="aspnetuserroles">
+            <EntityTypeMapping TypeName="radixModel.aspnetuserroles">
+              <MappingFragment StoreEntitySet="aspnetuserroles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetusers">
+            <EntityTypeMapping TypeName="radixModel.aspnetusers">
+              <MappingFragment StoreEntitySet="aspnetusers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
-                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
-                <ScalarProperty Name="log_id" ColumnName="log_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2329,6 +2348,24 @@
                 <ScalarProperty Name="Emp_Cant" ColumnName="Emp_Cant" />
                 <ScalarProperty Name="Emp_Nom" ColumnName="Emp_Nom" />
                 <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="login">
+            <EntityTypeMapping TypeName="radixModel.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="log_id" ColumnName="log_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetroles">
+            <EntityTypeMapping TypeName="radixModel.aspnetroles">
+              <MappingFragment StoreEntitySet="aspnetroles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

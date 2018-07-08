@@ -82,11 +82,13 @@ namespace IdentitySample.Controllers
             
             var emp = db.empresas.FirstOrDefault(e => e.Emp_Id == log.Emp_Id);
 
-          
+
             // El if conciste en buscar la cuenta que corresponde a la empresa
 
-         
-            if (emp.Emp_Nom==model.objEmpresas.Emp_Nom)
+
+            
+
+            if (emp.Emp_Nom == model.objEmpresas.Emp_Nom)
             {
 
                 switch (result)
@@ -94,12 +96,16 @@ namespace IdentitySample.Controllers
 
                     case SignInStatus.Success:
 
+
+
                         // var pers = db.Usuario.FirstOrDefault(p => p.usu_rut == login.usu_rut);
 
                         //Crear una variable de session 
                         HttpContext.Session.Add("Rut", log.Per_Rut);
+                        HttpContext.Session.Add("Emp_id", emp.Emp_Id);
                         HttpContext.Session.Add("Empresa", emp.Emp_Nom);
                         HttpContext.Session.Add("Correo", log.Id);
+
 
 
                         return RedirectToLocal(returnUrl);
@@ -113,8 +119,8 @@ namespace IdentitySample.Controllers
                         ModelState.AddModelError("", "Invalid login attempt.");
                         return View(model);
                 }
+
             }
-           
             return View(model);
         }
 

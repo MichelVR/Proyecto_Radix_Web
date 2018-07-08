@@ -222,6 +222,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\subempresasController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -450,6 +451,11 @@
     <Content Include="Views\empresas\Details.cshtml" />
     <Content Include="Views\empresas\Edit.cshtml" />
     <Content Include="Views\empresas\Index.cshtml" />
+    <Content Include="Views\subempresas\Create.cshtml" />
+    <Content Include="Views\subempresas\Delete.cshtml" />
+    <Content Include="Views\subempresas\Details.cshtml" />
+    <Content Include="Views\subempresas\Edit.cshtml" />
+    <Content Include="Views\subempresas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

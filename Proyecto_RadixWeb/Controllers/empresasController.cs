@@ -15,9 +15,9 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: empresas
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View(db.empresas.ToList());
+            return View(db.empresas.Where(e=> e.Emp_Nom!=id).ToList());
         }
 
         // GET: empresas/Details/5

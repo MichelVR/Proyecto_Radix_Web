@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Proyecto_RadixWeb.Models.subempresas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <h3>@ViewBag.empresa</h3>
+    <p>
+        @Html.ActionLink("Create New", "Create",new {emp_id= ViewBag.emp_id , empresa= @ViewBag.empresa })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sub_Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sub_Cant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sub_Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sub_Dir)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comunas.Com_Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sub_Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sub_Cant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sub_Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sub_Dir)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comunas.Com_Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Sub_Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Sub_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Sub_Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+

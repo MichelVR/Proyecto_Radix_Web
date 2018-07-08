@@ -12,13 +12,23 @@ namespace IdentitySample.Controllers
         {
             
             
-            if (User.IsInRole("Administrador"))
+            if (User.IsInRole("Radix"))
             {
                 
+              
+                return RedirectToAction("Index","empresas",new {id="Radix" });
+                //return View("index","empresas");
+
+            }
+            else if (User.IsInRole("Administrador"))
+            {
+
                 string empresa = HttpContext.Session["Empresa"].ToString();
+                string emp_id =HttpContext.Session["emp_id"].ToString();
                 ViewBag.empresa = empresa;
 
-                return View("DashBoardAdmin");
+                return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id= emp_id });
+                //return View("index","empresas");
 
             }
 

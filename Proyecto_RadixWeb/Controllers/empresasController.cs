@@ -13,6 +13,7 @@ namespace Proyecto_RadixWeb.Controllers
     public class empresasController : Controller
     {
         private radixEntities db = new radixEntities();
+        
 
         // GET: empresas
         public ActionResult Index(string id)

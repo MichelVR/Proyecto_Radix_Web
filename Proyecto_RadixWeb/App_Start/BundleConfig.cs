@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using System.Web;
+using System.Web.Optimization;
 
 namespace IdentitySample
 {
@@ -7,6 +8,27 @@ namespace IdentitySample
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
+                   "~/Content/vendor/bootstrap/css/bootstrap.min.css",
+                   "~/Content/vendor/font-awesome/css/font-awesome.min.css",
+                   "~/Content/vendor/datatables/dataTables.bootstrap4.css",
+                   "~/Content/css/sb-admin.css"
+
+                   ));
+
+
+            bundles.Add(new StyleBundle("~/bundles/js").Include(
+                "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js",
+                "~/Content/vendor/jquery/jquery.min.js",
+                  "~/Content/vendor/jquery-easing/jquery.easing.min.js",
+                  "~/Content/vendor/chart.js/Chart.min.js",
+                  "~/Content/vendor/datatables/jquery.dataTables.js",
+                  "~/Content/vendor/datatables/dataTables.bootstrap4.js",
+                  "~/Content/js/sb-admin.min.js",
+                  "~/Content/js/sb-admin-datatables.min.js",
+                  "~/Content/js/sb-admin-charts.min.js"
+
+                  ));
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

@@ -3,58 +3,69 @@
 @{
     ViewBag.Title = "Index";
 }
-
-
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PC_NombreArch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PC_Rev)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PC_Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PC_PesoArch)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PC_Binario)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PC_NombreArch)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PC_Rev)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PC_Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PC_PesoArch)
-            </td>
-            <td>
-                @Html.ActionLink("Descargar Docx", "DescargarDocx", new { id = item.PC_Id })  |
-                @Html.ActionLink("Descargar Pdf", "DescargarPdf", new { id = item.PC_Id })
-                @*@Html.DisplayFor(modelItem => item.PC_Binario)*@
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.PC_Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.PC_Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.PC_Id })
-            </td>
-        </tr>
-    }
-    
-    </table>
+    <div class="panel panel-success table-responsive">
+        <div class="panel-heading">Plaillas</div>
+       
+        <table class="table table-striped table-sm">
+            @*table-striped table-sm*@
+            <tr>
+                <th>
+                    Titulo del archivo
+                </th>
+                <th>
+                    Revisado
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Peso
+                </th>
+                <th>
+                    <center>Accion</center>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PC_NombreArch)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PC_Rev)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PC_Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PC_PesoArch)
+                    </td>
+                    <td>
+                        <center>
+                            @Html.ActionLink("Descargar Docx", "DescargarDocx", new { id = item.PC_Id })  |
+                            @Html.ActionLink("Descargar Pdf", "DescargarPdf", new { id = item.PC_Id })
+                        </center>
+
+                        @*@Html.DisplayFor(modelItem => item.PC_Binario)*@
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PC_Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.PC_Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PC_Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Subir Documento", "Create")
+                    </td>
+                </tr>
+            }
+        </table>
+        
+        </div>
 </body>

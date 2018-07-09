@@ -4,11 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-    <h3>@ViewBag.empresa</h3>
-    <p>
-        @Html.ActionLink("Create New", "Create",new {emp_id= ViewBag.emp_id , empresa= @ViewBag.empresa })
-    </p>
-    <table class="table">
+<h3>@ViewBag.empresa</h3>
+<p>
+   
+</p>
+<div class="panel panel-success table-responsive">
+    <div class="panel-heading">Sub Empresas</div>
+
+    <table class="table table-striped table-sm">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Sub_Nom)
@@ -29,35 +32,38 @@
                 @Html.DisplayNameFor(model => model.empresas.Emp_Nom)
             </th>
             <th></th>
+            <th>@Html.ActionLink("Nueva SubEmpresa", "Create", new { emp_id = ViewBag.emp_id, empresa = @ViewBag.empresa })</th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sub_Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sub_Cant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sub_Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sub_Dir)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.comunas.Com_Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Sub_Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Sub_Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Sub_Id })
-            </td>
-        </tr>
-    }
-    
-    </table>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Cant)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sub_Dir)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.comunas.Com_Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.empresas.Emp_Nom)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Sub_Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Sub_Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Sub_Id })
+                </td>
+                <td> </td>
+            </tr>
+        }
+
+    </table>
+    </div>

@@ -25,10 +25,8 @@ namespace Proyecto_RadixWeb.Models
         public string PC_Rev { get; set; }
         public string PC_Estado { get; set; }
         public string PC_PesoArch { get; set; }
-        public int DT_Id { get; set; }
         public byte[] PC_Binario { get; set; }
     
-        public virtual doctipos doctipos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contratos> contratos { get; set; }
     }

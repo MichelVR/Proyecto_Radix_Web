@@ -20,11 +20,12 @@
                 <a href="@Url.Action("Index", "Home")">  <img style="position:absolute; height:60px;  width:160px;" src="~/Imagenes/Logo Radix_v2.png" /> </a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
-                    
+                <ul class="nav navbar-nav" style="margin-left: 150px;">
+                    <li>@Html.ActionLink("Plantilla", "Index", "planillascontratos")</li>
+                    <li>@Html.ActionLink("Plantilla", "Index", "planillascontratos")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>*@
+
 
 
                     @if (Request.IsAuthenticated && User.IsInRole("Radix"))

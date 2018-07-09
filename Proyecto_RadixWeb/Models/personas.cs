@@ -17,10 +17,10 @@ namespace Proyecto_RadixWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public personas()
         {
-            this.documentos = new HashSet<documentos>();
             this.pago = new HashSet<pago>();
             this.contratos = new HashSet<contratos>();
             this.login = new HashSet<login>();
+            this.documentos = new HashSet<documentos>();
         }
     
         public string Per_Rut { get; set; }
@@ -49,8 +49,6 @@ namespace Proyecto_RadixWeb.Models
         public int THor_Id { get; set; }
     
         public virtual cargos cargos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<documentos> documentos { get; set; }
         public virtual estadosciviles estadosciviles { get; set; }
         public virtual fichadescuentos fichadescuentos { get; set; }
         public virtual fichasasistencias fichasasistencias { get; set; }
@@ -64,5 +62,7 @@ namespace Proyecto_RadixWeb.Models
         public virtual ICollection<contratos> contratos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<login> login { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<documentos> documentos { get; set; }
     }
 }

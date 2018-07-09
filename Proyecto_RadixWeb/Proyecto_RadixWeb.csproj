@@ -221,6 +221,7 @@
     <Compile Include="Controllers\empresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\planillascontratosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\subempresasController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -251,9 +252,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\contratos.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\doctipos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\documentos.cs">
@@ -456,6 +454,11 @@
     <Content Include="Views\subempresas\Details.cshtml" />
     <Content Include="Views\subempresas\Edit.cshtml" />
     <Content Include="Views\subempresas\Index.cshtml" />
+    <Content Include="Views\planillascontratos\Create.cshtml" />
+    <Content Include="Views\planillascontratos\Delete.cshtml" />
+    <Content Include="Views\planillascontratos\Details.cshtml" />
+    <Content Include="Views\planillascontratos\Edit.cshtml" />
+    <Content Include="Views\planillascontratos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

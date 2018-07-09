@@ -41,9 +41,17 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: subempresas/Create
         public ActionResult Create(int? emp_id, string empresa)
         {
+
+            List<regiones> listaregiones = db.regiones.ToList();
+            ViewBag.regiones = new SelectList(listaregiones, "Reg_id", "Reg_Nom");
+
+
+
+
+            ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom");
             ViewBag.emp_id = emp_id;
             ViewBag.empresa = empresa;
-            ViewBag.Com_Id = new SelectList(db.comunas, "Com_Id", "Com_Nom");
+
             //ViewBag.Emp_Id = new SelectList(db.empresas, "Emp_Id", "Emp_Nom");
             return View();
         }
@@ -53,7 +61,7 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Sub_Id,Sub_Nom,Sub_Cant,Emp_Id,Sub_Estado,Sub_Dir,Com_Id")] subempresas subempresas,int emp_id,string empresa)
+        public ActionResult Create([Bind(Include = "Sub_Id,Sub_Nom,Sub_Cant,Sub_Estado,Sub_Dir,Com_Id")] subempresas subempresas, int emp_id, string empresa)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +75,27 @@ namespace Proyecto_RadixWeb.Controllers
             //ViewBag.Emp_Id = new SelectList(db.empresas, "Emp_Id", "Emp_Nom", subempresas.Emp_Id);
             return View(subempresas);
         }
+
+
+
+        public JsonResult ObtenerProvincia(int Reg_Id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<provincias> listaprovincia = db.provincias.Where(p => p.Reg_Id == Reg_Id).OrderBy(pp => pp.Prov_Nom).ToList();
+
+            return Json(listaprovincia, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult ObtenerComuna(int Prov_Id)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<comunas> listacomuna = db.comunas.Where(p => p.Prov_Id == Prov_Id).OrderBy(pp => pp.Com_Nom).ToList();
+
+            return Json(listacomuna, JsonRequestBehavior.AllowGet);
+
+        }
+
 
         // GET: subempresas/Edit/5
         public ActionResult Edit(int? id)

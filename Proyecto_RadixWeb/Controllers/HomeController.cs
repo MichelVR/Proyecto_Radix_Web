@@ -27,6 +27,7 @@ namespace IdentitySample.Controllers
                 string empresa = HttpContext.Session["Empresa"].ToString();
                 string emp_id = HttpContext.Session["emp_id"].ToString();
                 ViewBag.empresa = empresa;
+                ViewBag.emp_id = emp_id;
                 //esto es temporal hasta que se logre hacer funcional el dashboard de administrador
                 return View("DashBoardAdmin");
                 //return RedirectToAction("Index", "subempresas", new { emp_nom = empresa, emp_id = emp_id });

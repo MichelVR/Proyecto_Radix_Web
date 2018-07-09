@@ -12,7 +12,8 @@ namespace IdentitySample
                    "~/Content/vendor/bootstrap/css/bootstrap.min.css",
                    "~/Content/vendor/font-awesome/css/font-awesome.min.css",
                    "~/Content/vendor/datatables/dataTables.bootstrap4.css",
-                   "~/Content/css/sb-admin.css"
+                   "~/Content/css/sb-admin.css",
+                    "~/Content/estilo.css"
 
                    ));
 

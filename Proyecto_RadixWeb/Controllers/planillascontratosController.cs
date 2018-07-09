@@ -37,7 +37,7 @@ namespace Proyecto_RadixWeb.Controllers
         }
 
 
-        public ActionResult DescargarDocx(int? id, int td )
+        public ActionResult DescargarDocx(int? id)
         {
 
             var archivo = db.planillascontratos.Where(p => p.PC_Id == id).FirstOrDefault();

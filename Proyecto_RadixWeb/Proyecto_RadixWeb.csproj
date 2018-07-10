@@ -218,8 +218,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\cargosController.cs" />
     <Compile Include="Controllers\empresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\horario_laboralController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\planillascontratosController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -254,6 +256,9 @@
     <Compile Include="Models\contratos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\diassemanales.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\documentos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -273,6 +278,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\horario.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\horario_laboral.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -303,6 +311,7 @@
     <Compile Include="Models\MultipleAgregarSubEmpresas.cs" />
     <Compile Include="Models\MultipleClassLogin.cs" />
     <Compile Include="Models\MultipleClassRegistrar.cs" />
+    <Compile Include="Models\MultipleHorario.cs" />
     <Compile Include="Models\nacionalidades.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -343,9 +352,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tiposhorasextras.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tiposnacionalidades.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tiposperiodos.cs">
@@ -664,6 +670,17 @@
     <Content Include="Views\Home\administrar.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Paginas _Layout2\Documentos.cshtml" />
+    <Content Include="Views\cargos\Create.cshtml" />
+    <Content Include="Views\cargos\Delete.cshtml" />
+    <Content Include="Views\cargos\Details.cshtml" />
+    <Content Include="Views\cargos\Edit.cshtml" />
+    <Content Include="Views\cargos\Index.cshtml" />
+    <Content Include="Views\horario_laboral\Create.cshtml" />
+    <Content Include="Views\horario_laboral\Delete.cshtml" />
+    <Content Include="Views\horario_laboral\Details.cshtml" />
+    <Content Include="Views\horario_laboral\Edit.cshtml" />
+    <Content Include="Views\horario_laboral\Index.cshtml" />
+    <Content Include="Views\horario_laboral\HorarioSemanal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

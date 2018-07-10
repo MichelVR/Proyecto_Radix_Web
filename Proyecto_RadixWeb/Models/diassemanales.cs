@@ -12,18 +12,18 @@ namespace Proyecto_RadixWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tiposnacionalidades
+    public partial class diassemanales
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tiposnacionalidades()
+        public diassemanales()
         {
-            this.nacionalidades = new HashSet<nacionalidades>();
+            this.horario_laboral = new HashSet<horario_laboral>();
         }
     
-        public int TNac_Id { get; set; }
-        public string TNac_Nom { get; set; }
+        public int Ds_id { get; set; }
+        public string Ds_Nom { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<nacionalidades> nacionalidades { get; set; }
+        public virtual ICollection<horario_laboral> horario_laboral { get; set; }
     }
 }

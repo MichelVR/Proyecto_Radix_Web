@@ -53,7 +53,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual fichadescuentos fichadescuentos { get; set; }
         public virtual fichasasistencias fichasasistencias { get; set; }
         public virtual grupos grupos { get; set; }
-        public virtual nacionalidades nacionalidades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pago> pago { get; set; }
         public virtual tiposhorasextras tiposhorasextras { get; set; }
@@ -64,5 +63,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual ICollection<login> login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<documentos> documentos { get; set; }
+        public virtual nacionalidades nacionalidades { get; set; }
     }
 }

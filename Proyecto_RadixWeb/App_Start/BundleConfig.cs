@@ -13,7 +13,8 @@ namespace IdentitySample
                    "~/Content/vendor/font-awesome/css/font-awesome.min.css",
                    "~/Content/vendor/datatables/dataTables.bootstrap4.css",
                    "~/Content/css/sb-admin.css",
-                    "~/Content/estilo.css"
+                    "~/Content/estilo.css",
+                      "~/Content/estilosRegistrar.css"
 
                    ));
 

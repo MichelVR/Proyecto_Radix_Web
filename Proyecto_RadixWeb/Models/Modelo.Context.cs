@@ -35,7 +35,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<horario> horario { get; set; }
         public virtual DbSet<jornada> jornada { get; set; }
         public virtual DbSet<pago> pago { get; set; }
-        public virtual DbSet<personas> personas { get; set; }
         public virtual DbSet<sectores> sectores { get; set; }
         public virtual DbSet<subempresas> subempresas { get; set; }
         public virtual DbSet<tipoformaspago> tipoformaspago { get; set; }
@@ -54,10 +53,10 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<empresas> empresas { get; set; }
         public virtual DbSet<login> login { get; set; }
         public virtual DbSet<aspnetroles> aspnetroles { get; set; }
-        public virtual DbSet<documentos> documentos { get; set; }
-        public virtual DbSet<planillascontratos> planillascontratos { get; set; }
         public virtual DbSet<diassemanales> diassemanales { get; set; }
         public virtual DbSet<horario_laboral> horario_laboral { get; set; }
         public virtual DbSet<nacionalidades> nacionalidades { get; set; }
+        public virtual DbSet<documentos> documentos { get; set; }
+        public virtual DbSet<planillascontratos> planillascontratos { get; set; }
     }
 }

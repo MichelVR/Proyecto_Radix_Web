@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="radixModel.horario" Width="1.5" PointX="0.75" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.jornada" Width="1.5" PointX="0.75" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.pago" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="radixModel.personas" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.sectores" Width="1.5" PointX="0.75" PointY="24.875" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.subempresas" Width="1.5" PointX="5.25" PointY="40.75" IsExpanded="true" />
         <EntityTypeShape EntityType="radixModel.tipoformaspago" Width="1.5" PointX="5.25" PointY="17.125" IsExpanded="true" />
@@ -28,19 +27,11 @@
         <AssociationConnector Association="radixModel.fk_Bancos_has_TiposCuentas_Bancos1" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.fk_Bancos_has_TiposCuentas_TiposCuentas1" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.fk_FormasDePago_BancosTiposCuentas1" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_Personas_cargos1" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_personas_estadocivil" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.FK_fichadescuentos_tipodescuento" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_personas_descuentos" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_personas_fichasasistencia" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.fk_Grupos_Horario1" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.fk_Grupos_Jornada1" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.fk_Grupos_Sectores1" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_personas_grupos" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.fk_FormasDePago_TipoFormasPago1" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_Pago_Personas1" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_personas_thora" ManuallyRouted="false" />
-        <AssociationConnector Association="radixModel.fk_personas_tipoimpuesto" ManuallyRouted="false" />
         <AssociationConnector Association="radixModel.FK_tipoimpuesto_tipoperiodo" ManuallyRouted="false" />
         <EntityTypeShape EntityType="radixModel.comunas" Width="1.5" PointX="3" PointY="41.25" />
         <EntityTypeShape EntityType="radixModel.provincias" Width="1.5" PointX="0.75" PointY="41.25" />
@@ -49,7 +40,6 @@
         <AssociationConnector Association="radixModel.FK_subempresas_comunas" />
         <AssociationConnector Association="radixModel.FK_regiones_provincias" />
         <EntityTypeShape EntityType="radixModel.contratos" Width="1.5" PointX="8.875" PointY="15.75" />
-        <AssociationConnector Association="radixModel.fk_Contratos_Personas" />
         <AssociationConnector Association="radixModel.FK_contratos_subempresas" />
         <AssociationConnector Association="radixModel.fk_Contratos_TiposContratos1" />
         <EntityTypeShape EntityType="radixModel.aspnetuserroles" Width="1.5" PointX="9.25" PointY="2" />
@@ -60,19 +50,16 @@
         <AssociationConnector Association="radixModel.fk_Login_CuentaAsp" />
         <AssociationConnector Association="radixModel.fk_Login_Empresa1" />
         <AssociationConnector Association="radixModel.FK_subempresas_empresas" />
-        <AssociationConnector Association="radixModel.FK_login_Persona1" />
         <EntityTypeShape EntityType="radixModel.aspnetroles" Width="1.5" PointX="11.625" PointY="1.75" />
         <AssociationConnector Association="radixModel.aspnetuserrolesaspnetroles" />
-        <EntityTypeShape EntityType="radixModel.documentos" Width="1.5" PointX="7.875" PointY="8.375" />
-        <EntityTypeShape EntityType="radixModel.planillascontratos" Width="1.5" PointX="0.75" PointY="1" />
-        <AssociationConnector Association="radixModel.FK_contratos_planillacontratos" />
-        <AssociationConnector Association="radixModel.fk_Documento_persona" />
         <EntityTypeShape EntityType="radixModel.diassemanales" Width="1.5" PointX="8" PointY="20.125" />
         <EntityTypeShape EntityType="radixModel.horario_laboral" Width="1.5" PointX="10.25" PointY="11.75" />
         <AssociationConnector Association="radixModel.fk_Horario_Cargo" />
         <AssociationConnector Association="radixModel.fk_Horario_Dias" />
         <EntityTypeShape EntityType="radixModel.nacionalidades" Width="1.5" PointX="3.375" PointY="0.875" />
-        <AssociationConnector Association="radixModel.fk_personas_nac" />
+        <EntityTypeShape EntityType="radixModel.documentos" Width="1.5" PointX="7.875" PointY="8.5" />
+        <EntityTypeShape EntityType="radixModel.planillascontratos" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="radixModel.FK_contratos_planillacontratos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

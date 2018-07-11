@@ -1,66 +1,42 @@
 ﻿@model Proyecto_RadixWeb.Models.planillascontratos
 
 @{
-    Layout = null;
+    ViewBag.Title = "Details";
 }
 
-<!DOCTYPE html>
+<h2>Details</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>planillascontratos</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.PC_NombreArch)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PC_NombreArch)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PC_Rev)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PC_Rev)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PC_Estado)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PC_Estado)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PC_PesoArch)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PC_PesoArch)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PC_Binario)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PC_Binario)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.PC_Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+<div>
+    <h4>planillascontratos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PC_Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PC_Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PC_Ext)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PC_Ext)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PC_Binario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PC_Binario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PC_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -21,6 +21,32 @@ namespace Proyecto_RadixWeb.Controllers
             return View(db.planillascontratos.ToList());
         }
 
+        public ActionResult DescargarDocx(int? id)
+        {
+
+            var archivo = db.planillascontratos.Where(p => p.PC_Id == id).FirstOrDefault();
+
+         
+            return File(archivo.PC_Binario, "document/docx", archivo.PC_Nom + ".docx");
+        }
+
+        public ActionResult DescargarPdf(int? id)
+        {
+            var archivo = db.planillascontratos.Where(dp => dp.PC_Id == id).FirstOrDefault();
+
+
+            SautinSoft.PdfMetamorphosis p = new SautinSoft.PdfMetamorphosis();
+
+            if (p != null)
+            {
+                byte[] pdfbyte = p.DocxToPdfConvertByte(archivo.PC_Binario);
+
+                return File(pdfbyte, "document/pdf", archivo.PC_Nom + ".pdf");
+            }
+
+            return View();
+
+        }
         // GET: planillascontratos/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,28 +62,6 @@ namespace Proyecto_RadixWeb.Controllers
             return View(planillascontratos);
         }
 
-
-        public ActionResult DescargarDocx(int? id)
-        {
-
-            var archivo = db.planillascontratos.Where(p => p.PC_Id == id).FirstOrDefault();
-
-
-            return File(archivo.PC_Binario, "document/docx", archivo.PC_NombreArch + ".docx");
-        }
-
-        public ActionResult DescargarPdf(int? id)
-        {
-
-            var archivo = db.planillascontratos.Where(p => p.PC_Id == id).FirstOrDefault();
-
-
-            return File(archivo.PC_Binario, "document/pdf", archivo.PC_NombreArch + ".pdf");
-        }
-
-
-
-
         // GET: planillascontratos/Create
         public ActionResult Create()
         {
@@ -69,12 +73,12 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PC_Id,PC_NombreArch,PC_Rev,PC_Estado,PC_PesoArch")] planillascontratos planillascontratos,HttpPostedFileBase plantilla)
+        public ActionResult Create([Bind(Include = "PC_Id,PC_Nom,PC_Ext")] planillascontratos planillascontratos, HttpPostedFileBase plantilla)
         {
             if (plantilla != null && plantilla.ContentLength > 0)
             {
                 var length = plantilla.InputStream.Length; //Length: 103050706
-               
+
                 byte[] datoplantilla = null;
                 using (var binaryImage = new BinaryReader(plantilla.InputStream))
                 {
@@ -83,7 +87,6 @@ namespace Proyecto_RadixWeb.Controllers
                 planillascontratos.PC_Binario = datoplantilla;
 
             }
-
 
             if (ModelState.IsValid)
             {
@@ -115,7 +118,7 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PC_Id,PC_NombreArch,PC_Rev,PC_Estado,PC_PesoArch,PC_Binario")] planillascontratos planillascontratos)
+        public ActionResult Edit([Bind(Include = "PC_Id,PC_Nom,PC_Ext,PC_Binario")] planillascontratos planillascontratos)
         {
             if (ModelState.IsValid)
             {

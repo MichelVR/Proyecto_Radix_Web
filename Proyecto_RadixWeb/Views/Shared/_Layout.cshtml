@@ -1,11 +1,4 @@
-﻿@if (Request.IsAuthenticated && User.IsInRole("Radix"))
-{
-    Layout = "~/Views/Shared/_Layout3.cshtml";
-
-}
-else
-
-{<!DOCTYPE html>
+﻿<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -51,9 +44,9 @@ else
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#services">Servicios</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#portfolio">Galeria</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#about">Sobre Nosotros</a>
                         </li>
@@ -64,23 +57,29 @@ else
                             <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
                         </li>
                     </ul>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav" style="margin-left: 150px;">
-                       
+                    <ul class="nav text-uppercase ml-auto" style="margin-left: 150px;">
+
                         @if (Request.IsAuthenticated && User.IsInRole("Radix"))
                         {
                             <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
                             <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
                         }
                     </ul>
-                    <ul class="navbar-nav text-uppercase ml-auto";">
 
-                        <li>@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>-</li>
-                        <li>@Html.ActionLink("Log In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    <ul class="navbar-nav text-uppercase ml-auto" ;">
+
+                        @*<li class="nav-item">@Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="@Url.Action("Register", "Account")">Registrarse </a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="@Url.Action("Login", "Account")">Log in </a></li>
+
+                        @*<li class="nav-item">@Html.ActionLink("Log In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+
+
+
                     </ul>
                 </div>
+               
             </div>
         </nav>
 
@@ -311,4 +310,3 @@ else
     </body>
 
 </html>
-}

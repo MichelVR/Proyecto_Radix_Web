@@ -14,12 +14,6 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class grupos
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public grupos()
-        {
-            this.personas = new HashSet<personas>();
-        }
-    
         public int Grup_Id { get; set; }
         public string Grup_Nom { get; set; }
         public int Jor_Id { get; set; }
@@ -29,7 +23,5 @@ namespace Proyecto_RadixWeb.Models
         public virtual horario horario { get; set; }
         public virtual jornada jornada { get; set; }
         public virtual sectores sectores { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personas> personas { get; set; }
     }
 }

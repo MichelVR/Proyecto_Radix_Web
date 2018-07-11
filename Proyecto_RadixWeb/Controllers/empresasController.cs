@@ -18,7 +18,10 @@ namespace Proyecto_RadixWeb.Controllers
         // GET: empresas
         public ActionResult Index(string id)
         {
-            return View(db.empresas.Where(e=> e.Emp_Nom!=id).ToList());
+            var empresaslista = db.empresas.Include(e=>e.subempresas);
+            
+
+            return View(empresaslista.ToList());
         }
 
         // GET: empresas/Details/5

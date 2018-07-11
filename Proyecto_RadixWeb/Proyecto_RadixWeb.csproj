@@ -112,6 +112,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PdfMetamorphosis, Version=7.0.6.4, Culture=neutral, PublicKeyToken=f77041e5caa5fc2f, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.pdfmetamorphosis.7.0.6.4\lib\net461\PdfMetamorphosis.dll</HintPath>
+    </Reference>
+    <Reference Include="SautinSoft.PdfFocus, Version=6.9.7.6, Culture=neutral, PublicKeyToken=0b79b934109b3e9e, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.pdffocus.6.9.7.6\lib\net461\SautinSoft.PdfFocus.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -311,14 +317,12 @@
     <Compile Include="Models\MultipleAgregarSubEmpresas.cs" />
     <Compile Include="Models\MultipleClassLogin.cs" />
     <Compile Include="Models\MultipleClassRegistrar.cs" />
+    <Compile Include="Models\MultipleEmpresa.cs" />
     <Compile Include="Models\MultipleHorario.cs" />
     <Compile Include="Models\nacionalidades.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pago.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\personas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\planillascontratos.cs">
@@ -705,11 +709,6 @@
     <Content Include="Views\subempresas\Details.cshtml" />
     <Content Include="Views\subempresas\Edit.cshtml" />
     <Content Include="Views\subempresas\Index.cshtml" />
-    <Content Include="Views\planillascontratos\Create.cshtml" />
-    <Content Include="Views\planillascontratos\Delete.cshtml" />
-    <Content Include="Views\planillascontratos\Details.cshtml" />
-    <Content Include="Views\planillascontratos\Edit.cshtml" />
-    <Content Include="Views\planillascontratos\Index.cshtml" />
     <Content Include="Views\Home\administrar.cshtml" />
     <Content Include="Views\Paginas _Layout2\Documentos.cshtml" />
     <Content Include="Views\cargos\Create.cshtml" />
@@ -727,6 +726,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\planillascontratos\Create.cshtml" />
+    <Content Include="Views\planillascontratos\Delete.cshtml" />
+    <Content Include="Views\planillascontratos\Details.cshtml" />
+    <Content Include="Views\planillascontratos\Edit.cshtml" />
+    <Content Include="Views\planillascontratos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

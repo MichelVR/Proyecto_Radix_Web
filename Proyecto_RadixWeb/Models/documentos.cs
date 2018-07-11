@@ -16,11 +16,8 @@ namespace Proyecto_RadixWeb.Models
     {
         public int Doc_Id { get; set; }
         public string Doc_Nom { get; set; }
-        public string Doc_Pes { get; set; }
-        public string Doc_Des { get; set; }
+        public string Doc_Ext { get; set; }
         public byte[] Doc_Binario { get; set; }
         public string Per_Rut { get; set; }
-    
-        public virtual personas personas { get; set; }
     }
 }

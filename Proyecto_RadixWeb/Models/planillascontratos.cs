@@ -21,10 +21,8 @@ namespace Proyecto_RadixWeb.Models
         }
     
         public int PC_Id { get; set; }
-        public string PC_NombreArch { get; set; }
-        public string PC_Rev { get; set; }
-        public string PC_Estado { get; set; }
-        public string PC_PesoArch { get; set; }
+        public string PC_Nom { get; set; }
+        public string PC_Ext { get; set; }
         public byte[] PC_Binario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

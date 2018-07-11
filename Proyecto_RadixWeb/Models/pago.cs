@@ -24,6 +24,5 @@ namespace Proyecto_RadixWeb.Models
     
         public virtual bancostiposcuentas bancostiposcuentas { get; set; }
         public virtual tipoformaspago tipoformaspago { get; set; }
-        public virtual personas personas { get; set; }
     }
 }

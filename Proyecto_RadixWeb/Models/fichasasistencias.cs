@@ -14,12 +14,6 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class fichasasistencias
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public fichasasistencias()
-        {
-            this.personas = new HashSet<personas>();
-        }
-    
         public int FAsi_Id { get; set; }
         public Nullable<int> FAsi_CanD { get; set; }
         public byte[] FAsi_Dia { get; set; }
@@ -28,8 +22,5 @@ namespace Proyecto_RadixWeb.Models
         public Nullable<int> FAsi_CanH { get; set; }
         public string Cos_Id { get; set; }
         public Nullable<System.DateTime> FAsi_Fecha { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personas> personas { get; set; }
     }
 }

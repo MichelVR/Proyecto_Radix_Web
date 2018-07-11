@@ -20,7 +20,6 @@ namespace Proyecto_RadixWeb.Models
         public int TCon_Id { get; set; }
         public string Per_Rut { get; set; }
     
-        public virtual personas personas { get; set; }
         public virtual subempresas subempresas { get; set; }
         public virtual tiposcontratos tiposcontratos { get; set; }
         public virtual planillascontratos planillascontratos { get; set; }

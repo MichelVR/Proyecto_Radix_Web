@@ -14,12 +14,6 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class fichadescuentos
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public fichadescuentos()
-        {
-            this.personas = new HashSet<personas>();
-        }
-    
         public int Desc_Id { get; set; }
         public string Desc_Nom { get; set; }
         public int TDes_Id { get; set; }
@@ -28,7 +22,5 @@ namespace Proyecto_RadixWeb.Models
         public string Desc_Forma { get; set; }
     
         public virtual tiposdescuentos tiposdescuentos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personas> personas { get; set; }
     }
 }

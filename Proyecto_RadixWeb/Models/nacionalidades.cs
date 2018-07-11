@@ -14,16 +14,7 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class nacionalidades
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public nacionalidades()
-        {
-            this.personas = new HashSet<personas>();
-        }
-    
         public int Nac_Id { get; set; }
         public string Nac_Nom { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<personas> personas { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Proyecto_RadixWeb.Models
         public cargos()
         {
             this.horario_laboral = new HashSet<horario_laboral>();
+            this.personas = new HashSet<personas>();
         }
     
         public int Car_Id { get; set; }
@@ -25,5 +26,7 @@ namespace Proyecto_RadixWeb.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<horario_laboral> horario_laboral { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<personas> personas { get; set; }
     }
 }

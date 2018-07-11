@@ -47,7 +47,6 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<comunas> comunas { get; set; }
         public virtual DbSet<provincias> provincias { get; set; }
         public virtual DbSet<regiones> regiones { get; set; }
-        public virtual DbSet<contratos> contratos { get; set; }
         public virtual DbSet<aspnetuserroles> aspnetuserroles { get; set; }
         public virtual DbSet<aspnetusers> aspnetusers { get; set; }
         public virtual DbSet<empresas> empresas { get; set; }
@@ -58,5 +57,8 @@ namespace Proyecto_RadixWeb.Models
         public virtual DbSet<nacionalidades> nacionalidades { get; set; }
         public virtual DbSet<documentos> documentos { get; set; }
         public virtual DbSet<planillascontratos> planillascontratos { get; set; }
+        public virtual DbSet<generos> generos { get; set; }
+        public virtual DbSet<contratos> contratos { get; set; }
+        public virtual DbSet<personas> personas { get; set; }
     }
 }

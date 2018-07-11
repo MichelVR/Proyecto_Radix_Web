@@ -21,5 +21,6 @@ namespace Proyecto_RadixWeb.Models
     
         public virtual aspnetusers aspnetusers { get; set; }
         public virtual empresas empresas { get; set; }
+        public virtual personas personas { get; set; }
     }
 }

@@ -14,7 +14,16 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class estadosciviles
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public estadosciviles()
+        {
+            this.personas = new HashSet<personas>();
+        }
+    
         public int EC_Id { get; set; }
         public string EC_Nom { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<personas> personas { get; set; }
     }
 }

@@ -14,10 +14,19 @@ namespace Proyecto_RadixWeb.Models
     
     public partial class tiposhorasextras
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tiposhorasextras()
+        {
+            this.personas = new HashSet<personas>();
+        }
+    
         public int THor_Id { get; set; }
         public string THor_Nom { get; set; }
         public float THor_ValorDia { get; set; }
         public float THor_ValorHoraDia { get; set; }
         public float THor_ValorHoraExtraEsp { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<personas> personas { get; set; }
     }
 }

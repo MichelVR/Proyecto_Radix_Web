@@ -74,8 +74,11 @@
           <Property Name="Con_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Sub_Id" Type="int" Nullable="false" />
           <Property Name="PC_Id" Type="int" />
-          <Property Name="TCon_Id" Type="int" Nullable="false" />
+          <Property Name="TCon_Id" Type="int" />
           <Property Name="Per_Rut" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Con_FechaInicio" Type="varchar" MaxLength="10" />
+          <Property Name="Con_FechaFin" Type="varchar" MaxLength="10" />
+          <Property Name="Con_Estado" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="diassemanales">
           <Key>
@@ -134,6 +137,13 @@
           <Property Name="FAsi_CanH" Type="int" />
           <Property Name="Cos_Id" Type="varchar" MaxLength="20" />
           <Property Name="FAsi_Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="generos">
+          <Key>
+            <PropertyRef Name="Gen_Id" />
+          </Key>
+          <Property Name="Gen_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gen_Nom" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="grupos">
           <Key>
@@ -197,11 +207,31 @@
           <Property Name="BTC_Id" Type="int" />
           <Property Name="Per_Rut" Type="varchar" MaxLength="12" Nullable="false" />
         </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="Per_Rut" />
+          </Key>
+          <Property Name="Per_Rut" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Per_Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_ApePat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_ApeMat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_Dir" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Per_Tel" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nac_Id" Type="int" Nullable="false" />
+          <Property Name="Gen_Id" Type="int" Nullable="false" />
+          <Property Name="EC_Id" Type="int" Nullable="false" />
+          <Property Name="Car_Id" Type="int" Nullable="false" />
+          <Property Name="Per_Suel" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="TImp_Id" Type="int" />
+          <Property Name="Per_Des" Type="varchar" MaxLength="100" />
+          <Property Name="Desc_Id" Type="int" />
+          <Property Name="THor_Id" Type="int" />
+        </EntityType>
         <EntityType Name="planillascontratos">
           <Key>
             <PropertyRef Name="PC_Id" />
           </Key>
-          <Property Name="PC_Id" Type="int" Nullable="false" />
+          <Property Name="PC_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PC_Nom" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="PC_Ext" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="PC_Binario" Type="longblob" Nullable="false" />
@@ -350,6 +380,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Contratos_Personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_contratos_planillacontratos">
           <End Role="planillascontratos" Type="Self.planillascontratos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -379,7 +423,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Contratos_TiposContratos1">
-          <End Role="tiposcontratos" Type="Self.tiposcontratos" Multiplicity="1">
+          <End Role="tiposcontratos" Type="Self.tiposcontratos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="contratos" Type="Self.contratos" Multiplicity="*" />
@@ -389,6 +433,20 @@
             </Principal>
             <Dependent Role="contratos">
               <PropertyRef Name="TCon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Documento_persona">
+          <End Role="personas" Type="Self.personas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="documentos" Type="Self.documentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="documentos">
+              <PropertyRef Name="Per_Rut" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -530,6 +588,118 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_login_Persona1">
+          <End Role="personas" Type="Self.personas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="login" Type="Self.login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Personas_cargos1">
+          <End Role="cargos" Type="Self.cargos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_descuentos">
+          <End Role="fichadescuentos" Type="Self.fichadescuentos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fichadescuentos">
+              <PropertyRef Name="Desc_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Desc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_estadocivil">
+          <End Role="estadosciviles" Type="Self.estadosciviles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estadosciviles">
+              <PropertyRef Name="EC_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="EC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_nac">
+          <End Role="nacionalidades" Type="Self.nacionalidades" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nacionalidades">
+              <PropertyRef Name="Nac_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Nac_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_sexo">
+          <End Role="generos" Type="Self.generos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="generos">
+              <PropertyRef Name="Gen_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Gen_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_thora">
+          <End Role="tiposhorasextras" Type="Self.tiposhorasextras" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposhorasextras">
+              <PropertyRef Name="THor_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="THor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_tipoimpuesto">
+          <End Role="tipoimpuestos" Type="Self.tipoimpuestos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="personas" Type="Self.personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoimpuestos">
+              <PropertyRef Name="TImp_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="TImp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_regiones_provincias">
           <End Role="regiones" Type="Self.regiones" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -615,6 +785,7 @@
           <EntitySet Name="estadosciviles" EntityType="Self.estadosciviles" Schema="radix" store:Type="Tables" />
           <EntitySet Name="fichadescuentos" EntityType="Self.fichadescuentos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="fichasasistencias" EntityType="Self.fichasasistencias" Schema="radix" store:Type="Tables" />
+          <EntitySet Name="generos" EntityType="Self.generos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="grupos" EntityType="Self.grupos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="horario" EntityType="Self.horario" Schema="radix" store:Type="Tables" />
           <EntitySet Name="horario_laboral" EntityType="Self.horario_laboral" Schema="radix" store:Type="Tables" />
@@ -622,6 +793,7 @@
           <EntitySet Name="login" EntityType="Self.login" Schema="radix" store:Type="Tables" />
           <EntitySet Name="nacionalidades" EntityType="Self.nacionalidades" Schema="radix" store:Type="Tables" />
           <EntitySet Name="pago" EntityType="Self.pago" Schema="radix" store:Type="Tables" />
+          <EntitySet Name="personas" EntityType="Self.personas" Schema="radix" store:Type="Tables" />
           <EntitySet Name="planillascontratos" EntityType="Self.planillascontratos" Schema="radix" store:Type="Tables" />
           <EntitySet Name="provincias" EntityType="Self.provincias" Schema="radix" store:Type="Tables" />
           <EntitySet Name="regiones" EntityType="Self.regiones" Schema="radix" store:Type="Tables" />
@@ -650,6 +822,10 @@
             <End Role="provincias" EntitySet="provincias" />
             <End Role="comunas" EntitySet="comunas" />
           </AssociationSet>
+          <AssociationSet Name="fk_Contratos_Personas" Association="Self.fk_Contratos_Personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
           <AssociationSet Name="FK_contratos_planillacontratos" Association="Self.FK_contratos_planillacontratos">
             <End Role="planillascontratos" EntitySet="planillascontratos" />
             <End Role="contratos" EntitySet="contratos" />
@@ -661,6 +837,10 @@
           <AssociationSet Name="fk_Contratos_TiposContratos1" Association="Self.fk_Contratos_TiposContratos1">
             <End Role="tiposcontratos" EntitySet="tiposcontratos" />
             <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Documento_persona" Association="Self.fk_Documento_persona">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="documentos" EntitySet="documentos" />
           </AssociationSet>
           <AssociationSet Name="FK_fichadescuentos_tipodescuento" Association="Self.FK_fichadescuentos_tipodescuento">
             <End Role="tiposdescuentos" EntitySet="tiposdescuentos" />
@@ -701,6 +881,38 @@
           <AssociationSet Name="fk_Login_Empresa1" Association="Self.fk_Login_Empresa1">
             <End Role="empresas" EntitySet="empresas" />
             <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_login_Persona1" Association="Self.FK_login_Persona1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Personas_cargos1" Association="Self.fk_Personas_cargos1">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_descuentos" Association="Self.fk_personas_descuentos">
+            <End Role="fichadescuentos" EntitySet="fichadescuentos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_estadocivil" Association="Self.fk_personas_estadocivil">
+            <End Role="estadosciviles" EntitySet="estadosciviles" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_nac" Association="Self.fk_personas_nac">
+            <End Role="nacionalidades" EntitySet="nacionalidades" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_sexo" Association="Self.fk_personas_sexo">
+            <End Role="generos" EntitySet="generos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_thora" Association="Self.fk_personas_thora">
+            <End Role="tiposhorasextras" EntitySet="tiposhorasextras" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_tipoimpuesto" Association="Self.fk_personas_tipoimpuesto">
+            <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
+            <End Role="personas" EntitySet="personas" />
           </AssociationSet>
           <AssociationSet Name="FK_regiones_provincias" Association="Self.FK_regiones_provincias">
             <End Role="regiones" EntitySet="regiones" />
@@ -753,6 +965,7 @@
           <Property Name="Car_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Car_Nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="horario_laboral" Relationship="radixModel.fk_Horario_Cargo" FromRole="cargos" ToRole="horario_laboral" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_Personas_cargos1" FromRole="cargos" ToRole="personas" />
         </EntityType>
         <EntityType Name="estadosciviles">
           <Key>
@@ -760,6 +973,7 @@
           </Key>
           <Property Name="EC_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EC_Nom" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_personas_estadocivil" FromRole="estadosciviles" ToRole="personas" />
         </EntityType>
         <EntityType Name="fichadescuentos">
           <Key>
@@ -772,6 +986,7 @@
           <Property Name="Desc_ValorMax" Type="Single" Nullable="false" />
           <Property Name="Desc_Forma" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tiposdescuentos" Relationship="Self.FK_fichadescuentos_tipodescuento" FromRole="fichadescuentos" ToRole="tiposdescuentos" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_personas_descuentos" FromRole="fichadescuentos" ToRole="personas" />
         </EntityType>
         <EntityType Name="fichasasistencias">
           <Key>
@@ -849,8 +1064,8 @@
           <Property Name="Sub_Dir" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Com_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="comunas" Relationship="radixModel.FK_subempresas_comunas" FromRole="subempresas" ToRole="comunas" />
-          <NavigationProperty Name="contratos" Relationship="radixModel.FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
           <NavigationProperty Name="empresas" Relationship="radixModel.FK_subempresas_empresas" FromRole="subempresas" ToRole="empresas" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.FK_contratos_subempresas" FromRole="subempresas" ToRole="contratos" />
         </EntityType>
         <EntityType Name="tipoformaspago">
           <Key>
@@ -868,6 +1083,7 @@
           <Property Name="TImp_nom" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TPer_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tiposperiodos" Relationship="Self.FK_tipoimpuesto_tipoperiodo" FromRole="tipoimpuestos" ToRole="tiposperiodos" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_personas_tipoimpuesto" FromRole="tipoimpuestos" ToRole="personas" />
         </EntityType>
         <EntityType Name="tiposcontratos">
           <Key>
@@ -902,6 +1118,7 @@
           <Property Name="THor_ValorDia" Type="Single" Nullable="false" />
           <Property Name="THor_ValorHoraDia" Type="Single" Nullable="false" />
           <Property Name="THor_ValorHoraExtraEsp" Type="Single" Nullable="false" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_personas_thora" FromRole="tiposhorasextras" ToRole="personas" />
         </EntityType>
         <EntityType Name="tiposperiodos">
           <Key>
@@ -1108,15 +1325,6 @@
             <End Role="regiones" EntitySet="regiones" />
             <End Role="provincias" EntitySet="provincias" />
           </AssociationSet>
-          <EntitySet Name="contratos" EntityType="radixModel.contratos" />
-          <AssociationSet Name="FK_contratos_subempresas" Association="radixModel.FK_contratos_subempresas">
-            <End Role="subempresas" EntitySet="subempresas" />
-            <End Role="contratos" EntitySet="contratos" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Contratos_TiposContratos1" Association="radixModel.fk_Contratos_TiposContratos1">
-            <End Role="tiposcontratos" EntitySet="tiposcontratos" />
-            <End Role="contratos" EntitySet="contratos" />
-          </AssociationSet>
           <EntitySet Name="aspnetuserroles" EntityType="radixModel.aspnetuserroles" />
           <EntitySet Name="aspnetusers" EntityType="radixModel.aspnetusers" />
           <EntitySet Name="empresas" EntityType="radixModel.empresas" />
@@ -1155,11 +1363,62 @@
           <EntitySet Name="nacionalidades" EntityType="radixModel.nacionalidades" />
           <EntitySet Name="documentos" EntityType="radixModel.documentos" />
           <EntitySet Name="planillascontratos" EntityType="radixModel.planillascontratos" />
+          <EntitySet Name="generos" EntityType="radixModel.generos" />
+          <EntitySet Name="contratos" EntityType="radixModel.contratos" />
+          <EntitySet Name="personas" EntityType="radixModel.personas" />
+          <AssociationSet Name="fk_Personas_cargos1" Association="radixModel.fk_Personas_cargos1">
+            <End Role="cargos" EntitySet="cargos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Contratos_Personas" Association="radixModel.fk_Contratos_Personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
           <AssociationSet Name="FK_contratos_planillacontratos" Association="radixModel.FK_contratos_planillacontratos">
             <End Role="planillascontratos" EntitySet="planillascontratos" />
             <End Role="contratos" EntitySet="contratos" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_contratos_subempresas" Association="radixModel.FK_contratos_subempresas">
+            <End Role="subempresas" EntitySet="subempresas" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Contratos_TiposContratos1" Association="radixModel.fk_Contratos_TiposContratos1">
+            <End Role="tiposcontratos" EntitySet="tiposcontratos" />
+            <End Role="contratos" EntitySet="contratos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Documento_persona" Association="radixModel.fk_Documento_persona">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="documentos" EntitySet="documentos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_estadocivil" Association="radixModel.fk_personas_estadocivil">
+            <End Role="estadosciviles" EntitySet="estadosciviles" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_descuentos" Association="radixModel.fk_personas_descuentos">
+            <End Role="fichadescuentos" EntitySet="fichadescuentos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_sexo" Association="radixModel.fk_personas_sexo">
+            <End Role="generos" EntitySet="generos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_login_Persona1" Association="radixModel.FK_login_Persona1">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="login" EntitySet="login" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_nac" Association="radixModel.fk_personas_nac">
+            <End Role="nacionalidades" EntitySet="nacionalidades" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_thora" Association="radixModel.fk_personas_thora">
+            <End Role="tiposhorasextras" EntitySet="tiposhorasextras" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_personas_tipoimpuesto" Association="radixModel.fk_personas_tipoimpuesto">
+            <End Role="tipoimpuestos" EntitySet="tipoimpuestos" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="comunas">
           <Key>
             <PropertyRef Name="Com_Id" />
@@ -1231,47 +1490,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="contratos">
-          <Key>
-            <PropertyRef Name="Con_Id" />
-          </Key>
-          <Property Name="Con_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Sub_Id" Type="Int32" Nullable="false" />
-          <Property Name="PC_Id" Type="Int32" />
-          <Property Name="TCon_Id" Type="Int32" Nullable="false" />
-          <Property Name="Per_Rut" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="subempresas" Relationship="radixModel.FK_contratos_subempresas" FromRole="contratos" ToRole="subempresas" />
-          <NavigationProperty Name="tiposcontratos" Relationship="radixModel.fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
-          <NavigationProperty Name="planillascontratos" Relationship="radixModel.FK_contratos_planillacontratos" FromRole="contratos" ToRole="planillascontratos" />
-        </EntityType>
-        <Association Name="FK_contratos_subempresas">
-          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.contratos" Role="contratos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="subempresas">
-              <PropertyRef Name="Sub_Id" />
-            </Principal>
-            <Dependent Role="contratos">
-              <PropertyRef Name="Sub_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Contratos_TiposContratos1">
-          <End Type="radixModel.tiposcontratos" Role="tiposcontratos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="radixModel.contratos" Role="contratos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tiposcontratos">
-              <PropertyRef Name="TCon_Id" />
-            </Principal>
-            <Dependent Role="contratos">
-              <PropertyRef Name="TCon_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="aspnetuserroles">
           <Key>
             <PropertyRef Name="UserId" />
@@ -1323,6 +1541,7 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="aspnetusers" Relationship="radixModel.fk_Login_CuentaAsp" FromRole="login" ToRole="aspnetusers" />
           <NavigationProperty Name="empresas" Relationship="radixModel.fk_Login_Empresa1" FromRole="login" ToRole="empresas" />
+          <NavigationProperty Name="personas" Relationship="radixModel.FK_login_Persona1" FromRole="login" ToRole="personas" />
         </EntityType>
         <Association Name="ApplicationUser_Roles">
           <End Type="radixModel.aspnetusers" Role="aspnetusers" Multiplicity="1">
@@ -1452,6 +1671,7 @@
           </Key>
           <Property Name="Nac_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nac_Nom" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_personas_nac" FromRole="nacionalidades" ToRole="personas" />
         </EntityType>
         <EntityType Name="documentos">
           <Key>
@@ -1462,6 +1682,7 @@
           <Property Name="Doc_Ext" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Doc_Binario" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="Per_Rut" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_Documento_persona" FromRole="documentos" ToRole="personas" />
         </EntityType>
         <EntityType Name="planillascontratos">
           <Key>
@@ -1473,6 +1694,89 @@
           <Property Name="PC_Binario" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="contratos" Relationship="radixModel.FK_contratos_planillacontratos" FromRole="planillascontratos" ToRole="contratos" />
         </EntityType>
+        <EntityType Name="generos">
+          <Key>
+            <PropertyRef Name="Gen_Id" />
+          </Key>
+          <Property Name="Gen_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gen_Nom" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_personas_sexo" FromRole="generos" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="contratos">
+          <Key>
+            <PropertyRef Name="Con_Id" />
+          </Key>
+          <Property Name="Con_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sub_Id" Type="Int32" Nullable="false" />
+          <Property Name="PC_Id" Type="Int32" />
+          <Property Name="TCon_Id" Type="Int32" />
+          <Property Name="Per_Rut" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Con_FechaInicio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Con_FechaFin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Con_Estado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="personas" Relationship="radixModel.fk_Contratos_Personas" FromRole="contratos" ToRole="personas" />
+          <NavigationProperty Name="planillascontratos" Relationship="radixModel.FK_contratos_planillacontratos" FromRole="contratos" ToRole="planillascontratos" />
+          <NavigationProperty Name="subempresas" Relationship="radixModel.FK_contratos_subempresas" FromRole="contratos" ToRole="subempresas" />
+          <NavigationProperty Name="tiposcontratos" Relationship="radixModel.fk_Contratos_TiposContratos1" FromRole="contratos" ToRole="tiposcontratos" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="Per_Rut" />
+          </Key>
+          <Property Name="Per_Rut" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Per_Nom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Per_ApePat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Per_ApeMat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Per_Dir" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Per_Tel" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Nac_Id" Type="Int32" Nullable="false" />
+          <Property Name="Gen_Id" Type="Int32" Nullable="false" />
+          <Property Name="EC_Id" Type="Int32" Nullable="false" />
+          <Property Name="Car_Id" Type="Int32" Nullable="false" />
+          <Property Name="Per_Suel" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TImp_Id" Type="Int32" />
+          <Property Name="Per_Des" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Desc_Id" Type="Int32" />
+          <Property Name="THor_Id" Type="Int32" />
+          <NavigationProperty Name="cargos" Relationship="radixModel.fk_Personas_cargos1" FromRole="personas" ToRole="cargos" />
+          <NavigationProperty Name="contratos" Relationship="radixModel.fk_Contratos_Personas" FromRole="personas" ToRole="contratos" />
+          <NavigationProperty Name="documentos" Relationship="radixModel.fk_Documento_persona" FromRole="personas" ToRole="documentos" />
+          <NavigationProperty Name="estadosciviles" Relationship="radixModel.fk_personas_estadocivil" FromRole="personas" ToRole="estadosciviles" />
+          <NavigationProperty Name="fichadescuentos" Relationship="radixModel.fk_personas_descuentos" FromRole="personas" ToRole="fichadescuentos" />
+          <NavigationProperty Name="generos" Relationship="radixModel.fk_personas_sexo" FromRole="personas" ToRole="generos" />
+          <NavigationProperty Name="login" Relationship="radixModel.FK_login_Persona1" FromRole="personas" ToRole="login" />
+          <NavigationProperty Name="nacionalidades" Relationship="radixModel.fk_personas_nac" FromRole="personas" ToRole="nacionalidades" />
+          <NavigationProperty Name="tiposhorasextras" Relationship="radixModel.fk_personas_thora" FromRole="personas" ToRole="tiposhorasextras" />
+          <NavigationProperty Name="tipoimpuestos" Relationship="radixModel.fk_personas_tipoimpuesto" FromRole="personas" ToRole="tipoimpuestos" />
+        </EntityType>
+        <Association Name="fk_Personas_cargos1">
+          <End Type="radixModel.cargos" Role="cargos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargos">
+              <PropertyRef Name="Car_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Car_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Contratos_Personas">
+          <End Type="radixModel.personas" Role="personas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_contratos_planillacontratos">
           <End Type="radixModel.planillascontratos" Role="planillascontratos" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -1487,7 +1791,147 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_contratos_subempresas">
+          <End Type="radixModel.subempresas" Role="subempresas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subempresas">
+              <PropertyRef Name="Sub_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="Sub_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Contratos_TiposContratos1">
+          <End Type="radixModel.tiposcontratos" Role="tiposcontratos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.contratos" Role="contratos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposcontratos">
+              <PropertyRef Name="TCon_Id" />
+            </Principal>
+            <Dependent Role="contratos">
+              <PropertyRef Name="TCon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Documento_persona">
+          <End Type="radixModel.personas" Role="personas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.documentos" Role="documentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="documentos">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_estadocivil">
+          <End Type="radixModel.estadosciviles" Role="estadosciviles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estadosciviles">
+              <PropertyRef Name="EC_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="EC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_descuentos">
+          <End Type="radixModel.fichadescuentos" Role="fichadescuentos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fichadescuentos">
+              <PropertyRef Name="Desc_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Desc_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_sexo">
+          <End Type="radixModel.generos" Role="generos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="generos">
+              <PropertyRef Name="Gen_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Gen_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_login_Persona1">
+          <End Type="radixModel.personas" Role="personas" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.login" Role="login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="Per_Rut" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="Per_Rut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_nac">
+          <End Type="radixModel.nacionalidades" Role="nacionalidades" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nacionalidades">
+              <PropertyRef Name="Nac_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="Nac_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_thora">
+          <End Type="radixModel.tiposhorasextras" Role="tiposhorasextras" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tiposhorasextras">
+              <PropertyRef Name="THor_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="THor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_personas_tipoimpuesto">
+          <End Type="radixModel.tipoimpuestos" Role="tipoimpuestos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="radixModel.personas" Role="personas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoimpuestos">
+              <PropertyRef Name="TImp_Id" />
+            </Principal>
+            <Dependent Role="personas">
+              <PropertyRef Name="TImp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1700,17 +2144,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="contratos">
-            <EntityTypeMapping TypeName="radixModel.contratos">
-              <MappingFragment StoreEntitySet="contratos">
-                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
-                <ScalarProperty Name="TCon_Id" ColumnName="TCon_Id" />
-                <ScalarProperty Name="PC_Id" ColumnName="PC_Id" />
-                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
-                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aspnetuserroles">
             <EntityTypeMapping TypeName="radixModel.aspnetuserroles">
               <MappingFragment StoreEntitySet="aspnetuserroles">
@@ -1811,6 +2244,49 @@
                 <ScalarProperty Name="PC_Ext" ColumnName="PC_Ext" />
                 <ScalarProperty Name="PC_Nom" ColumnName="PC_Nom" />
                 <ScalarProperty Name="PC_Id" ColumnName="PC_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="generos">
+            <EntityTypeMapping TypeName="radixModel.generos">
+              <MappingFragment StoreEntitySet="generos">
+                <ScalarProperty Name="Gen_Nom" ColumnName="Gen_Nom" />
+                <ScalarProperty Name="Gen_Id" ColumnName="Gen_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contratos">
+            <EntityTypeMapping TypeName="radixModel.contratos">
+              <MappingFragment StoreEntitySet="contratos">
+                <ScalarProperty Name="Con_Estado" ColumnName="Con_Estado" />
+                <ScalarProperty Name="Con_FechaFin" ColumnName="Con_FechaFin" />
+                <ScalarProperty Name="Con_FechaInicio" ColumnName="Con_FechaInicio" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
+                <ScalarProperty Name="TCon_Id" ColumnName="TCon_Id" />
+                <ScalarProperty Name="PC_Id" ColumnName="PC_Id" />
+                <ScalarProperty Name="Sub_Id" ColumnName="Sub_Id" />
+                <ScalarProperty Name="Con_Id" ColumnName="Con_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personas">
+            <EntityTypeMapping TypeName="radixModel.personas">
+              <MappingFragment StoreEntitySet="personas">
+                <ScalarProperty Name="THor_Id" ColumnName="THor_Id" />
+                <ScalarProperty Name="Desc_Id" ColumnName="Desc_Id" />
+                <ScalarProperty Name="Per_Des" ColumnName="Per_Des" />
+                <ScalarProperty Name="TImp_Id" ColumnName="TImp_Id" />
+                <ScalarProperty Name="Per_Suel" ColumnName="Per_Suel" />
+                <ScalarProperty Name="Car_Id" ColumnName="Car_Id" />
+                <ScalarProperty Name="EC_Id" ColumnName="EC_Id" />
+                <ScalarProperty Name="Gen_Id" ColumnName="Gen_Id" />
+                <ScalarProperty Name="Nac_Id" ColumnName="Nac_Id" />
+                <ScalarProperty Name="Per_Tel" ColumnName="Per_Tel" />
+                <ScalarProperty Name="Per_Dir" ColumnName="Per_Dir" />
+                <ScalarProperty Name="Per_ApeMat" ColumnName="Per_ApeMat" />
+                <ScalarProperty Name="Per_ApePat" ColumnName="Per_ApePat" />
+                <ScalarProperty Name="Per_Nom" ColumnName="Per_Nom" />
+                <ScalarProperty Name="Per_Rut" ColumnName="Per_Rut" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

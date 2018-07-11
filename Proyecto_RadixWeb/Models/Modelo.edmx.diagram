@@ -39,9 +39,6 @@
         <AssociationConnector Association="radixModel.FK_comuna_provincia" />
         <AssociationConnector Association="radixModel.FK_subempresas_comunas" />
         <AssociationConnector Association="radixModel.FK_regiones_provincias" />
-        <EntityTypeShape EntityType="radixModel.contratos" Width="1.5" PointX="8.875" PointY="15.75" />
-        <AssociationConnector Association="radixModel.FK_contratos_subempresas" />
-        <AssociationConnector Association="radixModel.fk_Contratos_TiposContratos1" />
         <EntityTypeShape EntityType="radixModel.aspnetuserroles" Width="1.5" PointX="9.25" PointY="2" />
         <EntityTypeShape EntityType="radixModel.aspnetusers" Width="1.5" PointX="7.375" PointY="1.5" />
         <EntityTypeShape EntityType="radixModel.empresas" Width="1.5" PointX="3" PointY="44" />
@@ -59,8 +56,23 @@
         <EntityTypeShape EntityType="radixModel.nacionalidades" Width="1.5" PointX="3.375" PointY="0.875" />
         <EntityTypeShape EntityType="radixModel.documentos" Width="1.5" PointX="7.875" PointY="8.5" />
         <EntityTypeShape EntityType="radixModel.planillascontratos" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="radixModel.generos" Width="1.5" PointX="3.375" PointY="26" />
+        <EntityTypeShape EntityType="radixModel.contratos" Width="1.5" PointX="10.875" PointY="18.625" />
+        <EntityTypeShape EntityType="radixModel.personas" Width="1.5" PointX="5.625" PointY="19.875" />
+        <AssociationConnector Association="radixModel.fk_Personas_cargos1" />
+        <AssociationConnector Association="radixModel.fk_Contratos_Personas" />
         <AssociationConnector Association="radixModel.FK_contratos_planillacontratos" />
-      </Diagram>
+        <AssociationConnector Association="radixModel.FK_contratos_subempresas" />
+        <AssociationConnector Association="radixModel.fk_Contratos_TiposContratos1" />
+        <AssociationConnector Association="radixModel.fk_Documento_persona" />
+        <AssociationConnector Association="radixModel.fk_personas_estadocivil" />
+        <AssociationConnector Association="radixModel.fk_personas_descuentos" />
+        <AssociationConnector Association="radixModel.fk_personas_sexo" />
+        <AssociationConnector Association="radixModel.FK_login_Persona1" />
+        <AssociationConnector Association="radixModel.fk_personas_nac" />
+        <AssociationConnector Association="radixModel.fk_personas_thora" />
+        <AssociationConnector Association="radixModel.fk_personas_tipoimpuesto" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

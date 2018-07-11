@@ -16,8 +16,11 @@ namespace Proyecto_RadixWeb.Controllers
         private radixEntities db = new radixEntities();
 
         // GET: planillascontratos
-        public ActionResult Index()
+        public ActionResult Index(string emp_nom, string emp_id)
         {
+            ViewBag.emp_id = Convert.ToInt32(emp_id);
+            ViewBag.empresa = emp_nom;
+
             return View(db.planillascontratos.ToList());
         }
 
@@ -73,7 +76,7 @@ namespace Proyecto_RadixWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PC_Id,PC_Nom,PC_Ext")] planillascontratos planillascontratos, HttpPostedFileBase plantilla)
+        public ActionResult Create([Bind(Include = "PC_Id,PC_Nom")] planillascontratos planillascontratos, HttpPostedFileBase plantilla)
         {
             if (plantilla != null && plantilla.ContentLength > 0)
             {
@@ -90,6 +93,7 @@ namespace Proyecto_RadixWeb.Controllers
 
             if (ModelState.IsValid)
             {
+                planillascontratos.PC_Ext =".docx";
                 db.planillascontratos.Add(planillascontratos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
